@@ -32,3 +32,23 @@ app.get("/products", (req, res) => {
         return res.json(data);
     });
 });
+
+//register user
+app.post("/register", (req, res) => {
+    const sql = "INSERT INTO users (`name`, `email`, `password`) VALUES (?)";
+    
+    const values = [
+        req.body.username, 
+        req.body.email,
+        req.body.password
+    ];
+    
+    db.query(sql, [values], (err, data) => {
+        if(err) {
+            console.error(err);
+            return res.status(500).json({ message: "Error registering user" });
+        }
+        return res.json({ message: "User registered successfully" });
+    });
+});
+
