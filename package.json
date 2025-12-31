@@ -1,0 +1,26 @@
+{
+  "name": "web2_react_project_backend",
+  "version": "1.0.0",
+  "description": "by Ali and Mohamad",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alosh07x/web2_react_project_backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alosh07x/web2_react_project_backend/issues"
+  },
+  "homepage": "https://github.com/alosh07x/web2_react_project_backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^3.1.11"
+  }
+}
