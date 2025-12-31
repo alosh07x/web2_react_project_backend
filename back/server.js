@@ -60,15 +60,47 @@ app.post("/login", (req, res) => {
         if(err) return res.status(500).json({ message: "Error logging in" });
         
         if(data.length > 0) {
-            // SUCCESS: Send back the user's info (excluding password for safety)
+            
             const user = data[0];
             const { password, ...otherDetails } = user; 
             return res.json({ message: "Login successful", user: otherDetails });
         } else {
-            // FAIL
+          
             return res.status(401).json({ message: "Wrong email or password" });
         }
     });
+});
+
+//send message
+app.post("/contact", (req, res) => {
+    const email = req.body.email;
+    const subject = req.body.subject;
+    const message = req.body.message;
+
+    
+    const checkUserSql = "SELECT * FROM users WHERE email = ?";
+    
+    db.query(checkUserSql, [email], (err, data) => {
+        if (err) return res.status(500).json(err);
+        
+       
+        if (data.length === 0) {
+            return res.status(401).json({ message: "Access Denied: You must be a registered user." });
+        }
+
+        
+        const insertSql = "INSERT INTO messages (`email`, `subject`, `message`) VALUES (?)";
+        const values = [email, subject, message];
+
+        db.query(insertSql, [values], (err, result) => {
+            if (err) return res.status(500).json(err);
+            return res.status(201).json({ message: "Message sent successfully" });
+        });
+    });
+});
+
+app.listen(8081, () => {
+    console.log("Listening...");
 });
 
 
