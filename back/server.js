@@ -13,10 +13,11 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "alosh07x", // <--- Don't forget your password
-    database: "csci426_project"
+    host: process.env.DB_HOST || "localhost",
+    user: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD || "alosh07x",
+    database: process.env.DB_NAME || "csci426_project",
+    port: process.env.DB_PORT || 3306
 });
 
 db.connect((err) => {
